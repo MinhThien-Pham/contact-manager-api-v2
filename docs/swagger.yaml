@@ -1,0 +1,271 @@
+swagger: '2.0'
+info:
+  description: This is the API documentation for the COP4331 Team 10 Contact Manager App
+  version: 1.0.0
+  title: COP4331-Team10-API
+  contact:
+    email: phamminhthien065@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+host: cop4331-team10.com
+basePath: /LAMPAPI
+schemes:
+  - http
+
+definitions:
+  Login:
+    type: object
+    required:
+      - login
+      - password
+    properties:
+      login:
+        type: string
+        example: "Thien"
+      password:
+        type: string
+        example: "secret"
+
+  Register:
+    type: object
+    required:
+      - firstName
+      - lastName
+      - login
+      - password
+    properties:
+      firstName:
+        type: string
+        example: "Minh Thien"
+      lastName:
+        type: string
+        example: "Pham"
+      login:
+        type: string
+        example: "johndoe"
+      password:
+        type: string
+        example: "mypassword"
+
+  Contact:
+    type: object
+    required:
+      - firstName
+      - lastName
+      - phone
+      - email
+      - userID
+    properties:
+      firstName:
+        type: string
+        example: "Minh Thien"
+      lastName:
+        type: string
+        example: "Pham"
+      phone:
+        type: string
+        example: "1234-5789"
+      email:
+        type: string
+        example: "hello@gmail.com"
+      userID:
+        type: integer
+        example: 1
+
+  SearchContact:
+    type: object
+    required:
+      - userID
+      - search
+    properties:
+      userID:
+        type: integer
+        example: 1
+      search:
+        type: string
+        example: "Thien"
+
+  UpdateContact:
+    type: object
+    required:
+      - id
+      - firstName
+      - lastName
+      - phone
+      - email
+    properties:
+      id:
+        type: integer
+        example: 10
+      firstName:
+        type: string
+        example: "Pham"
+      lastName:
+        type: string
+        example: "Thien"
+      phone:
+        type: string
+        example: "1111-11111"
+      email:
+        type: string
+        example: "hello@gmail.com"
+
+  DeleteContact:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        example: 1
+
+paths:
+  /Login.php:
+    post:
+      tags:
+        - Users
+      summary: Logs in to the contact manager
+      operationId: doLogin
+      description: Logs in to the contact manager
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: loginItem
+          description: Login
+          schema:
+            $ref: '#/definitions/Login'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found
+        500:
+          description: Server Error
+
+  /Register.php:
+    post:
+      tags:
+        - Users
+      summary: Registers a new user
+      operationId: doRegister
+      description: Creates a new user in the system
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: registerItem
+          description: User registration data
+          schema:
+            $ref: '#/definitions/Register'
+      responses:
+        200:
+          description: OK
+        500:
+          description: Server Error
+
+  /AddContact.php:
+    post:
+      tags:
+        - Contacts
+      summary: Adds a contact
+      operationId: addContact
+      description: Adds a contact to the contact app database
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: contactItem
+          description: Contact information
+          schema:
+            $ref: '#/definitions/Contact'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found
+        500:
+          description: Server Error
+
+  /SearchContacts.php:
+    post:
+      tags:
+        - Contacts
+      summary: Searches contacts
+      operationId: searchContacts
+      description: Returns contacts form the contact app database
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: searchItem
+          description: Contact Search
+          schema:
+            $ref: '#/definitions/SearchContact'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found
+        500:
+          description: Server Error
+
+  /UpdateContact.php:
+    post:
+      tags:
+        - Contacts
+      summary: Updates a contact
+      operationId: updateContact
+      description: Updates an existing contact by ID
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: updateItem
+          description: Updated contact data
+          schema:
+            $ref: '#/definitions/UpdateContact'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found
+        500:
+          description: Server Error
+
+  /DeleteContact.php:
+    post:
+      tags:
+        - Contacts
+      summary: Deletes a contact
+      operationId: deleteContact
+      description: Deletes a contact by ID
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: deleteItem
+          description: Contact to delete
+          schema:
+            $ref: '#/definitions/DeleteContact'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found
+        500:
+          description: Server Error

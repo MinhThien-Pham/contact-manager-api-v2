@@ -1,6 +1,6 @@
 <?php
 // search for contacts
-require_once __DIR__ . '/../src/helpers.php';
+require_once __DIR__ . '/helpers.php';
 
 $inData = getRequestJson();
 
