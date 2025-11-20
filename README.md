@@ -33,6 +33,17 @@ Compared to the original team implementation, this version:
 - Data format: JSON for both requests and responses
 - Documentation: Swagger/OpenAPI (YAML file stored in `docs/swagger.yaml`)
 
+## API Endpoints
+
+All endpoints accept and return JSON.
+
+- `Login.php` – Authenticate a user by login and password.
+- `Register.php` – Create a new user account with a hashed password.
+- `AddContact.php` – Add a contact for a given user.
+- `DeleteContact.php` – Delete a contact by ID.
+- `SearchContacts.php` – Search a user’s contacts by name, phone, or email.
+- `UpdateContact.php` – Update an existing contact’s details.
+
 ## Project Structure
 
 ```text
